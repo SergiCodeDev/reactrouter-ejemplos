@@ -85,6 +85,14 @@ export default function SidebarLayout({ loaderData }: Route.ComponentProps) {
                 replace: !isFirstSearch,
               })
             }}
+            onChange={(event) => {
+              const isFirstSearch = q === null;
+              const data = new FormData(event.currentTarget);
+              if (!(data.get("q") as string).trim()) {
+                data.delete("q"); // + quita el parámetro q
+              }
+              submit(data, { replace: !isFirstSearch });
+            }}
             role="search"
           >
             <input
